@@ -13,6 +13,7 @@ pipeline {
     stage('Build') {
       steps {
         sh 'cargo build'
+        sh 'cargo build --examples'
       }
     }
     // stage('Test') {
@@ -24,6 +25,7 @@ pipeline {
     stage('Lint') {
       steps {
         sh 'cargo check 2>&1 | tee rustc.log'
+        sh 'cargo check --examples 2>&1 | tee rustc.examples.log'
         sh 'cargo clean'
         sh 'cargo +nightly-2019-05-21 clippy 2>&1 | tee clippy.log'
       }

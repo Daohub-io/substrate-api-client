@@ -6,26 +6,17 @@ set -e
 # Print all executed commands
 set -x
 
-for entry in `ls rustc.log`; do
-    if grep -q error $entry; then
-        echo "error(s) found"
-        exit 1
-    fi
-    if grep -q warning $entry; then
-        echo "warning(s) found"
-        exit 1
-    fi
-done
-
-for entry in `ls clippy.log`; do
-    if grep -q error $entry; then
-        echo "error(s) found"
-        exit 1
-    fi
-    if grep -q warning $entry; then
-        echo "warning(s) found"
-        exit 1
-    fi
+for file in *.log; do
+    for entry in "$(basename "$file")"; do
+        if grep -q error $entry; then
+            echo "error(s) found in $file"
+            exit 1
+        fi
+        if grep -q warning $entry; then
+            echo "warning(s) found in $file"
+            exit 1
+        fi
+    done
 done
 
 exit 0
