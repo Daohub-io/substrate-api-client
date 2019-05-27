@@ -56,7 +56,7 @@ pub struct Api {
 impl Api {
     pub fn new(url: String) -> Api {
         Api {
-            url : url,
+            url,
             genesis_hash : None,
 //            metadata : None,
         }
@@ -133,7 +133,7 @@ impl Api {
             .spawn(move || {
                 connect(_url, |out| {
                     Getter {
-                        out: out,
+                        out,
                         request: jsonreq.clone(),
                         result: result_in.clone(),
                     }
@@ -174,7 +174,7 @@ impl Api {
             .spawn(move || {
                 connect(_url, |out| {
                     ExtrinsicHandler {
-                        out: out,
+                        out,
                         request: jsonreq.clone(),
                         result: result_in.clone(),
                     }
@@ -201,7 +201,7 @@ impl Api {
             .spawn(move || {
                 connect(_url, |out| {
                     SubscriptionHandler {
-                        out: out,
+                        out,
                         request: jsonreq.clone(),
                         result: result_in.clone(),
                     }
@@ -358,7 +358,7 @@ impl Handler for ExtrinsicHandler {
 
 pub fn storage_key_hash(module: &str, storage_key_name: &str, param: Option<Vec<u8>>) -> String {
         let mut key = module.as_bytes().to_vec();
-        key.append(&mut vec!(' ' as u8));
+        key.append(&mut vec!(b' '));
         key.append(&mut storage_key_name.as_bytes().to_vec());
         let mut keyhash;
         match param {
@@ -388,7 +388,7 @@ pub fn hexstr_to_vec(hexstr: String) -> Vec<u8> {
 
 pub fn hexstr_to_u256(hexstr: String) -> U256 {
     let _unhex = hexstr_to_vec(hexstr);
-    U256::from_little_endian(&mut &_unhex[..])
+    U256::from_little_endian(&_unhex[..])
 }
 
 pub fn hexstr_to_hash(hexstr: String) -> Hash {
