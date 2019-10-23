@@ -25,7 +25,7 @@ use crate::{Api,compose_extrinsic};
 
 use super::xt_primitives::*;
 
-pub const CONTRACTS_MODULE: &str = "Contract";
+pub const CONTRACTS_MODULE: &str = "Contracts";
 pub const CONTRACTS_PUT_CODE: &str = "put_code";
 pub const CONTRACTS_CREATE: &str = "create";
 pub const CONTRACTS_CALL: &str = "call";
