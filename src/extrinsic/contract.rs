@@ -27,7 +27,7 @@ use super::xt_primitives::*;
 
 pub const CONTRACTS_MODULE: &str = "Contracts";
 pub const CONTRACTS_PUT_CODE: &str = "put_code";
-pub const CONTRACTS_CREATE: &str = "create";
+pub const CONTRACTS_CREATE: &str = "instantiate";
 pub const CONTRACTS_CALL: &str = "call";
 
 pub type ContractPutCodeFn = ([u8; 2], Compact<u64>, Vec<u8>);
